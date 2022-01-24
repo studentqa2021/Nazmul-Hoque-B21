@@ -9,13 +9,15 @@ public class BaseLogin {
 	public void getLogin () throws Exception {
 		System.setProperty("webdriver.chrome.driver", BaseConfig.getValue("DRIVER_PATH"));
 		WebDriver driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		driver.get(BaseConfig.getValue("BASEURL"));
 		
-		OrbitzPageFactory pgFactory = new OrbitzPageFactory(driver);
-		pgFactory.getHomeSignInBtn().click();
-		pgFactory.getPopupSignInBtn().click();
-		pgFactory.getEmail().sendKeys(BaseConfig.getValue("EMAIL"));
-		pgFactory.getPassword().sendKeys("PASSWORD");
-		pgFactory.getLoginSignInBtn().click();
+		MasterPageFactory pgFactory = new MasterPageFactory(driver);
+		
+		pgFactory.getUsername().sendKeys(BaseConfig.getValue("USERNAME"));
+		pgFactory.getPassword().sendKeys(BaseConfig.getValue("PASSWORD"));
+		pgFactory.getLoginBtn().click();
+		
+		driver.quit();
 	}
 }
