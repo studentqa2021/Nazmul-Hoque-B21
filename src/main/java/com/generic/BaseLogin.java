@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.utilis.BaseConfig;
+import com.utilis.Highlighter;
 
 public class BaseLogin {
 	public void getLogin () throws Exception {
@@ -14,7 +15,9 @@ public class BaseLogin {
 		
 		MasterPageFactory pgFactory = new MasterPageFactory(driver);
 		
+		Highlighter.getColor(driver, pgFactory.getUsername());
 		pgFactory.getUsername().sendKeys(BaseConfig.getValue("USERNAME"));
+		Highlighter.getColor(driver, pgFactory.getPassword());
 		pgFactory.getPassword().sendKeys(BaseConfig.getValue("PASSWORD"));
 		pgFactory.getLoginBtn().click();
 		
